@@ -28,6 +28,11 @@ import static java.lang.Math.min;
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
+ * ---------
+ *
+ * Author of AlphanumericComparator:  Daniel Sawano, 2014, https://github.com/sawano/alphanumeric-comparator
+ * Original authors include: Daniel Migowski, Andre Bogus, and David Koelle
+ * 
  */
 
 /**

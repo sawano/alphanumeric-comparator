@@ -32,6 +32,8 @@ import static java.lang.Math.min;
 
 /**
  * This comparator is based on the AlphanumComparator found at http://www.DaveKoelle.com and rewritten by Daniel Sawano.
+ * <p>
+ * This source can be found at https://github.com/sawano/alphanumeric-comparator
  *
  * @author Daniel Sawano
  */

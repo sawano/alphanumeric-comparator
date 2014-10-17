@@ -43,3 +43,15 @@ Using the `AlphanumericComparator` would produce the following result instead:
 This code is available under GNU LGPL. (See source for details)
 
 The original Alphanum Algorithm can be found at http://www.DaveKoelle.com
+
+##Download
+
+Releases are available at the Maven central repository. Or you can just use the source code directly if you prefer that.
+
+```xml
+<dependency>
+    <groupId>se.sawano.java</groupId>
+    <artifactId>alphanumeric-comparator</artifactId>
+    <version>1.2</version>
+</dependency>
+```

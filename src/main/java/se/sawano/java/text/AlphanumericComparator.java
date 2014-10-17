@@ -179,7 +179,7 @@ import static java.util.Objects.requireNonNull;
 /*
  * Author of AlphanumericComparator:  Daniel Sawano, 2014, https://github.com/sawano/alphanumeric-comparator
  *
- * Original authors of tha Alphanum Java implementation include: Daniel Migowski, Andre Bogus, and David Koelle
+ * Original authors of the Alphanum Java implementation include: Daniel Migowski, Andre Bogus, and David Koelle
  * See http://www.DaveKoelle.com for information on the original algorithm.
  */
 

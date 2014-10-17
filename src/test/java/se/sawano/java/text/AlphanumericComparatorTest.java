@@ -179,36 +179,40 @@ import java.util.Comparator;
 import java.util.List;
 
 import static java.time.Instant.now;
-import static java.util.Locale.ENGLISH;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 public class AlphanumericComparatorTest {
 
-    private List<String> stringsToSort;
+    @Test
+    public void should_demonstrate_sorting() throws Exception {
+        givenStrings("HD 20GB", "HD 2GB");
+
+        whenSorting();
+
+        thenOrderShouldBe("HD 2GB", "HD 20GB");
+    }
 
     @Test
     public void should_sort_as_expected() throws Exception {
-        final List<String> input = readLines("unsorted.txt");
-        final List<String> expected = readLines("sorted.txt");
+        givenStrings(readLines("unsorted.txt"));
 
-        input.sort(new AlphanumericComparator());
+        whenSorting();
 
-        assertEquals(expected, input);
+        thenOrderShouldBe(readLines("sorted.txt"));
     }
 
     @Test
     public void should_sort_file_names() throws Exception {
-        final List<String> fileNames = readLines("files_unsorted.txt");
-        final List<String> expected = readLines("files_sorted.txt");
+        givenStrings(readLines("files_unsorted.txt"));
 
-        fileNames.sort(new AlphanumericComparator(ENGLISH));
+        whenSorting();
 
-        assertEquals(expected, fileNames);
+        thenOrderShouldBe(readLines("files_sorted.txt"));
     }
 
     @Test
     public void should_compare_performance() throws Exception {
-
         final List<String> list = readLines("dictionary.txt");
 
         @SuppressWarnings("unchecked") long totalOriginal = sortWith(list, new AlphanumComparator());
@@ -221,7 +225,7 @@ public class AlphanumericComparatorTest {
         long totalNew = 0;
         for (int i = 0; i < 500; ++i) {
             Collections.sort(list); // reset
-            final Duration duration = sort(list).using(comparator);
+            final Duration duration = whenSorting(list).using(comparator);
             totalNew += duration.toMillis();
         }
         return totalNew;
@@ -233,7 +237,11 @@ public class AlphanumericComparatorTest {
         return Duration.between(start, now());
     }
 
-    private AlphanumericComparatorTest sort(final List<String> stringsToSort) {
+    private void whenSorting() {
+        stringsToSort.sort(new AlphanumericComparator());
+    }
+
+    private AlphanumericComparatorTest whenSorting(final List<String> stringsToSort) {
         this.stringsToSort = stringsToSort;
         return this;
     }
@@ -241,6 +249,24 @@ public class AlphanumericComparatorTest {
     @SuppressWarnings("unchecked")
     private List<String> readLines(final String fileName) throws IOException {
         return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName));
+    }
+
+    private List<String> stringsToSort;
+
+    private void thenOrderShouldBe(final String... expected) {
+        thenOrderShouldBe(asList(expected));
+    }
+
+    private void thenOrderShouldBe(final List<String> expected) {
+        assertEquals(expected, stringsToSort);
+    }
+
+    private void givenStrings(final String... strings) {
+        stringsToSort = asList(strings);
+    }
+
+    private void givenStrings(final List<String> strings) {
+        stringsToSort = strings;
     }
 
 }

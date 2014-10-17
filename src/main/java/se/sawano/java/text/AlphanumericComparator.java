@@ -1,10 +1,16 @@
 package se.sawano.java.text;
 
 import java.nio.CharBuffer;
+import java.text.Collator;
 import java.util.Comparator;
+import java.util.Locale;
+import java.util.Optional;
 
 import static java.lang.Character.isDigit;
-import static java.lang.Math.min;
+import static java.nio.CharBuffer.wrap;
+import static java.util.Objects.requireNonNull;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 /*
  * The Alphanum Algorithm is an improved sorting algorithm for strings
@@ -31,14 +37,18 @@ import static java.lang.Math.min;
  * ---------
  *
  * Author of AlphanumericComparator:  Daniel Sawano, 2014, https://github.com/sawano/alphanumeric-comparator
- * Original authors include: Daniel Migowski, Andre Bogus, and David Koelle
- * 
+ * Original authors of tha Alphanum Java implementation include: Daniel Migowski, Andre Bogus, and David Koelle
+ *
  */
 
 /**
- * This comparator is based on the AlphanumComparator found at http://www.DaveKoelle.com and rewritten by Daniel Sawano.
+ * An implementation of a comparator that sort strings in an order that makes sense for a human.
+ * <p>
+ * This comparator is based on the AlphanumComparator found at http://www.DaveKoelle.com and has been rewritten and modified by Daniel Sawano.
  * <p>
  * This source can be found at https://github.com/sawano/alphanumeric-comparator
+ * <p>
+ * Note: this algorithm does not take into account numeric notation such as decimals, negative numbers, scientific notation etc. Any non-trivial number will be compared as text rather than numbers.
  *
  * @author Daniel Sawano
  */
@@ -46,13 +56,42 @@ public class AlphanumericComparator implements Comparator<String> {
 
     private static final int PRE_ALLOCATED_CHUNK_LENGTH = 100;
 
+    private final Optional<Collator> collator;
+
+    /**
+     * Creates a comparator that will use lexicographical sorting of the non-numerical parts of the compared strings.
+     */
+    public AlphanumericComparator() {
+        collator = empty();
+    }
+
+    /**
+     * Creates a comparator that will use locale-sensitive sorting of the non-numerical parts of the compared strings.
+     *
+     * @param locale
+     *         the locale to use
+     */
+    public AlphanumericComparator(final Locale locale) {
+        this(Collator.getInstance(requireNonNull(locale)));
+    }
+
+    /**
+     * Creates a comparator that will use the given collator to sort the non-numerical parts of the compared strings.
+     *
+     * @param collator
+     *         the collator to use
+     */
+    public AlphanumericComparator(final Collator collator) {
+        this.collator = of(collator);
+    }
+
     @Override
     public int compare(final String s1, final String s2) {
-        final CharBuffer b1 = CharBuffer.wrap(s1);
-        final CharBuffer b2 = CharBuffer.wrap(s2);
+        final CharBuffer b1 = wrap(s1).asReadOnlyBuffer();
+        final CharBuffer b2 = wrap(s2).asReadOnlyBuffer();
 
         while (b1.remaining() > 0 && b2.remaining() > 0) {
-            final int result = compareChunks(nextChunk(b1), nextChunk(b2));
+            final int result = compare(nextToken(b1), nextToken(b2));
             if (result != 0) {
                 return result;
             }
@@ -61,46 +100,63 @@ public class AlphanumericComparator implements Comparator<String> {
         return s1.length() - s2.length();
     }
 
-    private int compareChunks(final String thisChunk, final String thatChunk) {
-        if (isNumericChunk(thisChunk) && isNumericChunk(thatChunk)) {
-            final int numericalResult = compareNumerically(thisChunk, thatChunk);
+    private int compare(final CharBuffer s1, final CharBuffer s2) {
+        if (isNumeric(s1) && isNumeric(s2)) {
+            final int numericalResult = compareNumerically(s1, s2);
             if (numericalResult != 0) {
                 return numericalResult;
             }
         }
 
-        return thisChunk.compareTo(thatChunk);
+        return compareStrings(s1.toString(), s2.toString());
     }
 
-    private String nextChunk(final CharBuffer s) {
-        final StringBuilder chunk = new StringBuilder(min(s.length(), PRE_ALLOCATED_CHUNK_LENGTH));
-        final char first = s.get();
-        chunk.append(first);
-        final boolean firstWasDigit = isDigit(first);
+    private int compareStrings(final String s1, final String s2) {
+        return collator.map(c -> c.compare(s1, s2))
+                       .orElse(s1.compareTo(s2));
+    }
 
-        while (s.remaining() > 0 && firstWasDigit == isDigit(s.get(s.position()))) {
-            chunk.append(s.get());
+    private CharBuffer nextToken(final CharBuffer s) {
+        final int endOfToken = positionOfNextDigitBoundary(s);
+        final CharBuffer chunk = s.subSequence(0, endOfToken - s.position());
+        s.position(endOfToken);
+        return chunk;
+    }
+
+    private int positionOfNextDigitBoundary(final CharBuffer s) {
+        int endPos = s.position();
+        final boolean firstWasDigit = isDigit(s.get(s.position()));
+        while (endPos < s.limit() && firstWasDigit == isDigit(s.get(endPos))) {
+            ++endPos;
+        }
+        return endPos;
+    }
+
+    private boolean isNumeric(final CharBuffer string) {
+        return isDigit(string.get(string.position()));
+    }
+
+    private int compareNumerically(final CharBuffer s1, CharBuffer s2) {
+        trimLeadingZeros(s1);
+        trimLeadingZeros(s2);
+
+        if (s1.remaining() != s2.remaining()) {
+            return s1.remaining() - s2.remaining();
         }
 
-        return chunk.toString();
-    }
-
-    private boolean isNumericChunk(final String chunk) {
-        return isDigit(chunk.charAt(0));
-    }
-
-    private int compareNumerically(final String thisChunk, String thatChunk) {
-        if (thisChunk.length() != thatChunk.length()) {
-            return thisChunk.length() - thatChunk.length();
-        }
-
-        for (int i = 0; i < thisChunk.length(); i++) {
-            final int result = Character.compare(thisChunk.charAt(i), thatChunk.charAt(i));
+        while (s1.hasRemaining()) {
+            final int result = Character.compare(s1.get(), s2.get());
             if (result != 0) {
                 return result;
             }
         }
 
         return 0;
+    }
+
+    private void trimLeadingZeros(final CharBuffer numericalString) {
+        while (numericalString.remaining() > 0 && numericalString.get(numericalString.position()) == '0') {
+            numericalString.position(numericalString.position() + 1);
+        }
     }
 }

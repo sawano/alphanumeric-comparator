@@ -1,5 +1,5 @@
 # Alphanumeric Comparator 
-An implementation of a comparator that sort strings in an order that makes sense for a human. I.e. it performs a "alphabetical"/"alphanumeric" comparison instead of a lexicographical comparison.  
+An implementation of a comparator that sort strings in an order that makes sense for a human. I.e. it performs an "alphabetical"/"alphanumeric" comparison instead of a lexicographical comparison.  
 It is mainly intended to be used to sort information that are to be read by humans (in UI's etc). So keep in mind that what the "correct" ordering should be is entirely subjective and application specific. 
 It should however be straightforward to modify the comparator to suit any specific needs.
 

@@ -1,6 +1,4 @@
-# 
-A Java implementation of the Alphanum algorithm
-
+# Alphanumeric Comparator 
 An implementation of a comparator that sort strings in an order that makes sense for a human.
 
 ##Examples

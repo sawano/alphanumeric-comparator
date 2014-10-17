@@ -6,8 +6,6 @@ It should however be straightforward to modify the comparator to suit any specif
 
 ##Examples
 
-####Sorting file names
-
 Given file names:
 
     image-1.jpg
@@ -38,6 +36,19 @@ Using the `AlphanumericComparator` would produce the following result instead:
     image-10.jpg
     image-11.jpg
     image-22.jpg
+
+This comparator also supports the use of a locale-sensitive `Collator` for string comparison.
+
+```java
+    @Test
+    public void example() {
+        final List<String> stringsToSort = asList("HD 20GB", "HD 2GB");
+
+        stringsToSort.sort(new AlphanumericComparator(Locale.ENGLISH));
+        
+        assertEquals(asList("HD 2GB", "HD 20GB"), stringsToSort);
+    }
+```
 
 ##License
 This code is available under GNU LGPL. (See source for details)

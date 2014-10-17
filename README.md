@@ -39,6 +39,8 @@ Using the `AlphanumericComparator` would produce the following result instead:
 
 This comparator also supports the use of a locale-sensitive `Collator` for string comparison.
 
+### Code example
+
 ```java
     @Test
     public void example() {

@@ -190,7 +190,7 @@ import static java.util.Objects.requireNonNull;
  * <p>
  * This source can be found at https://github.com/sawano/alphanumeric-comparator
  * <p>
- * Note: this algorithm does not take into account numeric notation such as decimals, negative numbers, scientific notation etc. Any non-trivial number will be compared as text rather than numbers.
+ * Note: this algorithm does not take into account numeric notation such as decimals, negative numbers, scientific notation etc.
  *
  * @author Daniel Sawano
  */

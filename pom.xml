@@ -11,7 +11,7 @@
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>alphanumeric-comparator</name>
     <description>An implementation of a comparator that sort strings in an order that makes sense for a human.</description>
     <url>https://github.com/sawano/alphanumeric-comparator</url>
@@ -65,15 +65,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.4.1</version>
-                <configuration>
-                    <!-- set executor id to get around http://jira.codehaus.org/browse/MGPG-9 -->
-                    <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
             </plugin>
             <plugin>

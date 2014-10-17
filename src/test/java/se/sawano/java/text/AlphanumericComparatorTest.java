@@ -211,13 +211,13 @@ public class AlphanumericComparatorTest {
 
         final List<String> list = readLines("dictionary.txt");
 
-        long totalOriginal = sortWith(list, new AlphanumComparator());
+        @SuppressWarnings("unchecked") long totalOriginal = sortWith(list, new AlphanumComparator());
         long totalNew = sortWith(list, new AlphanumericComparator());
 
         System.out.printf("Original: %d, Current: %d\n", totalOriginal, totalNew);
     }
 
-    private long sortWith(final List<String> list, final Comparator comparator) {
+    private long sortWith(final List<String> list, final Comparator<String> comparator) {
         long totalNew = 0;
         for (int i = 0; i < 500; ++i) {
             Collections.sort(list); // reset

@@ -4,13 +4,10 @@ import java.nio.CharBuffer;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
-import java.util.Optional;
 
 import static java.lang.Character.isDigit;
 import static java.nio.CharBuffer.wrap;
 import static java.util.Objects.requireNonNull;
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 
 /*
  * The Alphanum Algorithm is an improved sorting algorithm for strings
@@ -54,15 +51,13 @@ import static java.util.Optional.of;
  */
 public class AlphanumericComparator implements Comparator<String> {
 
-    private static final int PRE_ALLOCATED_CHUNK_LENGTH = 100;
-
-    private final Optional<Collator> collator;
+    private final Collator collator;
 
     /**
      * Creates a comparator that will use lexicographical sorting of the non-numerical parts of the compared strings.
      */
     public AlphanumericComparator() {
-        collator = empty();
+        collator = null;
     }
 
     /**
@@ -82,7 +77,7 @@ public class AlphanumericComparator implements Comparator<String> {
      *         the collator to use
      */
     public AlphanumericComparator(final Collator collator) {
-        this.collator = of(collator);
+        this.collator = requireNonNull(collator);
     }
 
     @Override
@@ -112,8 +107,10 @@ public class AlphanumericComparator implements Comparator<String> {
     }
 
     private int compareStrings(final String s1, final String s2) {
-        return collator.map(c -> c.compare(s1, s2))
-                       .orElse(s1.compareTo(s2));
+        if (collator == null) {
+            return s1.compareTo(s2);
+        }
+        return collator.compare(s1, s2);
     }
 
     private CharBuffer nextToken(final CharBuffer s) {

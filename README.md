@@ -80,6 +80,6 @@ Releases are available at the Maven central repository. Or you can just use the 
 <dependency>
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```

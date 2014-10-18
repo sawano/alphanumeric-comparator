@@ -40,7 +40,7 @@ Using the `AlphanumericComparator` would produce the following result instead:
 
 ###Another example:
 
-If we sort the strings
+If we sort the strings:
 
     Hard drive 20GB
     Hard drive 2GB

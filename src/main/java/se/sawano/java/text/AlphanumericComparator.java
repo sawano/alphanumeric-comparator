@@ -259,9 +259,9 @@ public class AlphanumericComparator implements Comparator<String> {
 
     private CharBuffer nextToken(final CharBuffer s) {
         final int endOfToken = positionOfNextDigitBoundary(s);
-        final CharBuffer chunk = s.subSequence(0, endOfToken - s.position());
+        final CharBuffer token = s.subSequence(0, endOfToken - s.position());
         s.position(endOfToken);
-        return chunk;
+        return token;
     }
 
     private int positionOfNextDigitBoundary(final CharBuffer s) {

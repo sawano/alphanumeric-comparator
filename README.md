@@ -6,6 +6,7 @@ It should however be straightforward to modify the comparator to suit any specif
 
 ##Examples
 
+###Sorting files
 Given file names:
 
     image-1.jpg
@@ -37,6 +38,25 @@ Using the `AlphanumericComparator` would produce the following result instead:
     image-11.jpg
     image-22.jpg
 
+###Another example:
+
+If we sort the strings
+
+    Hard drive 20GB
+    Hard drive 2GB
+    
+A standard lexicographical sort would produce the following:
+
+    Hard drive 20GB
+    Hard drive 2GB
+
+While the `AlphanumericComparator` would produce:
+
+    Hard drive 2GB
+    Hard drive 20GB
+
+
+
 This comparator also supports the use of a locale-sensitive `Collator` for string comparison.
 
 ### Code example
@@ -51,11 +71,6 @@ This comparator also supports the use of a locale-sensitive `Collator` for strin
         assertEquals(asList("HD 2GB", "HD 20GB"), stringsToSort);
     }
 ```
-
-##License
-This code is available under GNU LGPL. (See source for details)
-
-The original Alphanum Algorithm can be found at http://www.DaveKoelle.com
 
 ##Download
 

@@ -173,7 +173,6 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
 
-import static java.lang.Character.isDigit;
 import static java.nio.CharBuffer.wrap;
 import static java.util.Objects.requireNonNull;
 /*
@@ -227,8 +226,8 @@ public class AlphanumericComparator implements Comparator<String> {
 
     @Override
     public int compare(final String s1, final String s2) {
-        final CharBuffer b1 = wrap(s1).asReadOnlyBuffer();
-        final CharBuffer b2 = wrap(s2).asReadOnlyBuffer();
+        final CharBuffer b1 = wrap(s1);
+        final CharBuffer b2 = wrap(s2);
 
         while (b1.remaining() > 0 && b2.remaining() > 0) {
             final int result = compare(nextToken(b1), nextToken(b2));
@@ -276,6 +275,14 @@ public class AlphanumericComparator implements Comparator<String> {
 
     private boolean isNumeric(final CharBuffer string) {
         return isDigit(string.get(string.position()));
+    }
+
+    private boolean isDigit(final char c) {
+        if (collator == null) {
+            final int cInt = (int) c;
+            return cInt >= 48 && cInt <= 57;
+        }
+        return Character.isDigit(c);
     }
 
     private int compareNumerically(final CharBuffer s1, CharBuffer s2) {

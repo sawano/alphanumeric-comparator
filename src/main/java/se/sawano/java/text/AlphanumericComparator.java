@@ -261,16 +261,9 @@ public class AlphanumericComparator implements Comparator<String> {
             moveWindow(b1);
             moveWindow(b2);
 
-            if (isNumerical(b1) && isNumerical(b2)) {
-                final int result = compareNumerically(b1, b2);
-                if (result != 0) {
-                    return result;
-                }
-            } else {
-                final int result = compareAsStrings(b1, b2);
-                if (result != 0) {
-                    return result;
-                }
+            final int result = compare(b1, b2);
+            if (result != 0) {
+                return result;
             }
 
             prepareForNextIteration(b1);
@@ -292,6 +285,14 @@ public class AlphanumericComparator implements Comparator<String> {
 
         buffer.position(start)
               .limit(end);
+    }
+
+    private int compare(final CharBuffer b1, final CharBuffer b2) {
+        if (isNumerical(b1) && isNumerical(b2)) {
+            return compareNumerically(b1, b2);
+        }
+
+        return compareAsStrings(b1, b2);
     }
 
     private boolean isNumerical(final CharBuffer buffer) {

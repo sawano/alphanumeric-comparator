@@ -216,7 +216,7 @@ import java.util.List;
 
 import static java.time.Instant.now;
 
-public class PerformanceTest {
+public class PerformanceIT {
 
     private List<String> stringsToSort;
 
@@ -224,11 +224,9 @@ public class PerformanceTest {
     public void should_compare_performance() throws Exception {
         final List<String> list = readLines("dictionary.txt");
 
-        @SuppressWarnings("unchecked") final long totalOriginal = sortWith(list, new AlphanumComparator());
-        final long totalNew = sortWith(list, new AlphanumericComparator());
+        final long total = sortWith(list, new AlphanumericComparator());
 
-        System.out.println("Sorted " + list.size() + " words 500 times");
-        System.out.printf("AlphanumericComparator: %d, Alphanum: %d\n", totalNew, totalOriginal);
+        System.out.printf("Sorted %d words 500 times in %d ms\n", list.size(), total);
     }
 
     private long sortWith(final List<String> list, final Comparator<String> comparator) {
@@ -241,7 +239,7 @@ public class PerformanceTest {
         return totalNew;
     }
 
-    private PerformanceTest whenSorting(final List<String> stringsToSort) {
+    private PerformanceIT whenSorting(final List<String> stringsToSort) {
         this.stringsToSort = stringsToSort;
         return this;
     }

@@ -225,15 +225,6 @@ public class AlphanumericComparatorTest {
     }
 
     @Test
-    public void should_sort_as_expected() throws Exception {
-        givenStrings(readLines("unsorted.txt"));
-
-        whenSorting();
-
-        thenOrderShouldBe(readLines("sorted.txt"));
-    }
-
-    @Test
     public void should_sort_file_names() throws Exception {
         givenStrings(readLines("files_unsorted.txt"));
 

@@ -233,7 +233,8 @@ public class ParameterizedTest {
                 {givenDanishComparator(), whenSorting("A", "a"), thenOrderShouldBe("A", "a")},
                 {givenFrenchComparator(), whenSorting("A", "a"), thenOrderShouldBe("a", "A")},
                 {givenComparator(), whenSorting("ä", "b"), thenOrderShouldBe("b", "ä")},
-                {givenGermanComparator(), whenSorting("ä", "b"), thenOrderShouldBe("ä", "b")}
+                {givenGermanComparator(), whenSorting("ä", "b"), thenOrderShouldBe("ä", "b")},
+                {givenComparator(), whenSorting("10", "1", "-1", "-a", "20", "02", "a"), thenOrderShouldBe("-1", "-a", "1", "02", "10", "20", "a")}
 
         });
     }

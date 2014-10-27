@@ -76,10 +76,16 @@ This comparator also supports the use of a locale-sensitive `Collator` for strin
 
 Releases are available at the Maven central repository. Or you can just use the source code directly if you prefer that.
 
+####Maven
 ```xml
 <dependency>
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
     <version>1.4</version>
 </dependency>
+```
+
+####Gradle
+```groovy
+'se.sawano.java:alphanumeric-comparator:1.4'
 ```

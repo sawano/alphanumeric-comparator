@@ -277,9 +277,10 @@ public class AlphanumericComparator implements Comparator<String> {
         int start = buffer.position();
         int end = buffer.position();
         final boolean isNumerical = isDigit(buffer.get(start));
-        for (; end < buffer.limit() && isNumerical == isDigit(buffer.get(end)); ++end) {
-            if (isNumerical && (start + 1 < buffer.limit()) && isZero(buffer.get(start)) && isDigit(buffer.get(end + 1))) {
-                ++start;
+        while (end < buffer.limit() && isNumerical == isDigit(buffer.get(end))) {
+            ++end;
+            if (isNumerical && (start + 1 < buffer.limit()) && isZero(buffer.get(start)) && isDigit(buffer.get(end))) {
+                ++start; // trim leading zeros
             }
         }
 
@@ -336,4 +337,5 @@ public class AlphanumericComparator implements Comparator<String> {
     private boolean isZero(final char c) {
         return c == '0';
     }
+
 }

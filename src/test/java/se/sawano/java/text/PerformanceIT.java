@@ -229,7 +229,7 @@ public class PerformanceIT {
         System.out.printf("Sorted %d words 500 times in %d ms\n", list.size(), total);
     }
 
-    private long sortWith(final List<String> list, final Comparator<String> comparator) {
+    private long sortWith(final List<String> list, final Comparator<CharSequence> comparator) {
         long totalNew = 0;
         for (int i = 0; i < 500; ++i) {
             Collections.sort(list); // reset
@@ -249,7 +249,7 @@ public class PerformanceIT {
         return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName));
     }
 
-    private Duration using(final Comparator<String> comparator) {
+    private Duration using(final Comparator<CharSequence> comparator) {
         final Instant start = now();
         stringsToSort.sort(comparator);
         return Duration.between(start, now());

@@ -221,7 +221,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author Daniel Sawano, Copyright 2014
  */
-public class AlphanumericComparator implements Comparator<String> {
+public class AlphanumericComparator implements Comparator<CharSequence> {
 
     private final Collator collator;
 
@@ -253,7 +253,7 @@ public class AlphanumericComparator implements Comparator<String> {
     }
 
     @Override
-    public int compare(final String s1, final String s2) {
+    public int compare(final CharSequence s1, final CharSequence s2) {
         final CharBuffer b1 = wrap(s1);
         final CharBuffer b2 = wrap(s2);
 

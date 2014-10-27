@@ -278,7 +278,7 @@ public class AlphanumericComparator implements Comparator<String> {
         int end = buffer.position();
         final boolean isNumerical = isDigit(buffer.get(start));
         for (; end < buffer.limit() && isNumerical == isDigit(buffer.get(end)); ++end) {
-            if (isNumerical && (start + 1 < buffer.limit()) && isZero(buffer.get(start))) {
+            if (isNumerical && (start + 1 < buffer.limit()) && isZero(buffer.get(start)) && isDigit(buffer.get(end + 1))) {
                 ++start;
             }
         }

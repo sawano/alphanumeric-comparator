@@ -81,11 +81,11 @@ Releases are available at the Maven central repository. Or you can just use the 
 <dependency>
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
-    <version>1.4</version>
+    <version>1.4.1</version>
 </dependency>
 ```
 
 ####Gradle
 ```groovy
-'se.sawano.java:alphanumeric-comparator:1.4'
+'se.sawano.java:alphanumeric-comparator:1.4.1'
 ```

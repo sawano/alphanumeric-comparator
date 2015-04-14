@@ -25,6 +25,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import static java.time.Instant.now;
 
@@ -33,10 +34,20 @@ public class PerformanceIT {
     private List<String> stringsToSort;
 
     @Test
-    public void should_compare_performance() throws Exception {
+    public void should_test_performance() throws Exception {
         final List<String> list = readLines("dictionary.txt");
 
         final long total = sortWith(list, new AlphanumericComparator());
+
+        System.out.printf("Sorted %d words 500 times in %d ms\n", list.size(), total);
+    }
+
+    @Test
+    //@Ignore("Collation is slow")
+    public void should_test_performance_with_collation() throws Exception {
+        final List<String> list = readLines("dictionary.txt");
+
+        final long total = sortWith(list, new AlphanumericComparator(Locale.ENGLISH));
 
         System.out.printf("Sorted %d words 500 times in %d ms\n", list.size(), total);
     }

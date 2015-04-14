@@ -20,10 +20,13 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.text.Collator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static se.sawano.java.text.Locales.DANISH;
+import static se.sawano.java.text.Locales.SWEDISH;
 
 public class AlphanumericComparatorIT {
 
@@ -45,8 +48,39 @@ public class AlphanumericComparatorIT {
         thenOrderShouldBe(readLines("files_sorted.txt"));
     }
 
+    @Test
+    public void should_sort_words_without_collator() throws Exception {
+        givenStrings(readLines("words_unsorted.txt"));
+
+        whenSorting();
+
+        thenOrderShouldBe(readLines("words_sorted.txt"));
+    }
+
+    @Test
+    public void should_sort_words_with_swedish_collator() throws Exception {
+        givenStrings(readLines("words_unsorted.txt"));
+
+        whenSortingWith(Collator.getInstance(SWEDISH.locale));
+
+        thenOrderShouldBe(readLines("words_sorted.txt"));
+    }
+
+    @Test
+    public void should_sort_words_with_danish_collator() throws Exception {
+        givenStrings(readLines("words_unsorted.txt"));
+
+        whenSortingWith(Collator.getInstance(DANISH.locale));
+
+        thenOrderShouldBe(readLines("words_sorted_dk.txt"));
+    }
+
     private void whenSorting() {
         stringsToSort.sort(new AlphanumericComparator());
+    }
+
+    private void whenSortingWith(final Collator collator) {
+        stringsToSort.sort(new AlphanumericComparator(collator));
     }
 
     @SuppressWarnings("unchecked")

@@ -75,7 +75,7 @@ This comparator also supports the use of a locale-sensitive `Collator` for strin
 And an example of how to sort using language specific collation rules:
 
 ```java
-   @Test
+    @Test
     public void should_demonstrate_sorting_with_swedish_collation() {
         final List<String> stringsToSort = asList("Ö", "Ø", "O");
 

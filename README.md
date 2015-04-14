@@ -56,8 +56,8 @@ While the `AlphanumericComparator` would produce:
     Hard drive 20GB
 
 
+This comparator also supports the use of a locale-sensitive `Collator` for string comparison. This makes this comparator very flexible for sorting.
 
-This comparator also supports the use of a locale-sensitive `Collator` for string comparison.
 
 ### Code example
 
@@ -69,6 +69,19 @@ This comparator also supports the use of a locale-sensitive `Collator` for strin
         stringsToSort.sort(new AlphanumericComparator(Locale.ENGLISH));
         
         assertEquals(asList("HD 2GB", "HD 20GB"), stringsToSort);
+    }
+```
+
+And an example of how to sort using language specific collation rules:
+
+```java
+   @Test
+    public void should_demonstrate_sorting_with_swedish_collation() {
+        final List<String> stringsToSort = asList("Ö", "Ø", "O");
+
+        stringsToSort.sort(new AlphanumericComparator(new Locale("sv", "SE")));
+
+        assertEquals(asList("O", "Ö", "Ø"), stringsToSort);
     }
 ```
 

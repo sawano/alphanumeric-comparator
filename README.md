@@ -8,9 +8,9 @@ It is mainly intended to be used to sort information that are to be read by huma
 It should however be straightforward to modify the comparator to suit any specific needs.
 
 
-##Examples
+## Examples
 
-###Sorting files
+### Sorting files
 Given file names:
 
     image-1.jpg
@@ -42,7 +42,7 @@ Using the `AlphanumericComparator` would produce the following result instead:
     image-11.jpg
     image-22.jpg
 
-###Another example:
+### Another example
 
 If we sort the strings:
 
@@ -89,11 +89,11 @@ And an example of how to sort using language specific collation rules:
     }
 ```
 
-##Download
+## Download
 
 Releases are available at the Maven central repository. Or you can just use the source code directly if you prefer that.
 
-####Maven
+#### Maven
 ```xml
 <dependency>
     <groupId>se.sawano.java</groupId>
@@ -102,7 +102,7 @@ Releases are available at the Maven central repository. Or you can just use the 
 </dependency>
 ```
 
-####Gradle
+#### Gradle
 ```groovy
 'se.sawano.java:alphanumeric-comparator:1.4.1'
 ```

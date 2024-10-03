@@ -17,6 +17,7 @@
 package se.sawano.java.text;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class PerformanceIT {
     }
 
     @Test
-    //@Ignore("Collation is slow")
+    @Ignore("Collation is slow")
     public void should_test_performance_with_collation() throws Exception {
         final List<String> list = readLines("dictionary.txt");
 

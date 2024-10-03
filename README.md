@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sawano/alphanumeric-comparator.svg?branch=master)](https://travis-ci.org/sawano/alphanumeric-comparator)
+![Build Status](https://github.com/sawano/alphanumeric-comparator/actions/workflows/maven.yml/badge.svg?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/se.sawano.java/alphanumeric-comparator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/se.sawano.java/alphanumeric-comparator)
 
 

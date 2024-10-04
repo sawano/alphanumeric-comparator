@@ -6,3 +6,16 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      maven-plugins:
+        applies-to: security-updates
+        patterns:
+          - "org.apache.maven.plugins:*"
+  - package-ecosystem: "github-actions"
+    # For GitHub Actions, you do not need to set the directory to /.github/workflows. Configuring the key to "/"
+    # automatically instructs Dependabot to search the /.github/workflows directory, as well as the
+    # action.yml/action.yaml file from the root directory.
+    directory: "/"
+    schedule:
+      interval: "daily"
+

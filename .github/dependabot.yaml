@@ -8,7 +8,7 @@ updates:
       interval: "daily"
     groups:
       maven-plugins:
-        applies-to: security-updates
+        applies-to: version-updates
         patterns:
           - "org.apache.maven.plugins:*"
   - package-ecosystem: "github-actions"

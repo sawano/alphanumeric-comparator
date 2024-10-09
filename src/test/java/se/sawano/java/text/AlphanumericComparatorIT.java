@@ -19,7 +19,7 @@ package se.sawano.java.text;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.Collator;
 import java.util.List;
 
@@ -31,7 +31,7 @@ import static se.sawano.java.text.Locales.SWEDISH;
 public class AlphanumericComparatorIT {
 
     @Test
-    public void should_demonstrate_sorting() throws Exception {
+    public void should_demonstrate_sorting() {
         givenStrings("HD 20GB", "HD 2GB");
 
         whenSorting();
@@ -40,7 +40,7 @@ public class AlphanumericComparatorIT {
     }
 
     @Test
-    public void should_sort_file_names() throws Exception {
+    public void should_sort_file_names() {
         givenStrings(readLines("files_unsorted.txt"));
 
         whenSorting();
@@ -49,7 +49,7 @@ public class AlphanumericComparatorIT {
     }
 
     @Test
-    public void should_sort_words_without_collator() throws Exception {
+    public void should_sort_words_without_collator() {
         givenStrings(readLines("words_unsorted.txt"));
 
         whenSorting();
@@ -58,7 +58,7 @@ public class AlphanumericComparatorIT {
     }
 
     @Test
-    public void should_sort_words_with_swedish_collator() throws Exception {
+    public void should_sort_words_with_swedish_collator() {
         givenStrings(readLines("words_unsorted.txt"));
 
         whenSortingWith(Collator.getInstance(SWEDISH.locale));
@@ -67,7 +67,7 @@ public class AlphanumericComparatorIT {
     }
 
     @Test
-    public void should_sort_words_with_danish_collator() throws Exception {
+    public void should_sort_words_with_danish_collator() {
         givenStrings(readLines("words_unsorted.txt"));
 
         whenSortingWith(Collator.getInstance(DANISH.locale));
@@ -83,9 +83,8 @@ public class AlphanumericComparatorIT {
         stringsToSort.sort(new AlphanumericComparator(collator));
     }
 
-    @SuppressWarnings("unchecked")
-    private List<String> readLines(final String fileName) throws IOException {
-        return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName));
+    private List<String> readLines(final String fileName) {
+        return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName), Charset.defaultCharset());
     }
 
     private void thenOrderShouldBe(final String... expected) {

@@ -20,7 +20,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class PerformanceIT {
     private List<String> stringsToSort;
 
     @Test
-    public void should_test_performance() throws Exception {
+    public void should_test_performance() {
         final List<String> list = readLines("dictionary.txt");
 
         final long total = sortWith(list, new AlphanumericComparator());
@@ -45,7 +45,7 @@ public class PerformanceIT {
 
     @Test
     @Ignore("Collation is slow")
-    public void should_test_performance_with_collation() throws Exception {
+    public void should_test_performance_with_collation() {
         final List<String> list = readLines("dictionary.txt");
 
         final long total = sortWith(list, new AlphanumericComparator(Locale.ENGLISH));
@@ -68,9 +68,8 @@ public class PerformanceIT {
         return this;
     }
 
-    @SuppressWarnings("unchecked")
-    private List<String> readLines(final String fileName) throws IOException {
-        return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName));
+    private List<String> readLines(final String fileName) {
+        return IOUtils.readLines(getClass().getResourceAsStream("/" + fileName), Charset.defaultCharset());
     }
 
     private Duration using(final Comparator<CharSequence> comparator) {

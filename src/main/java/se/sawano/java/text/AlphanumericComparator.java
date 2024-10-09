@@ -24,6 +24,16 @@ import java.util.Locale;
 import static java.nio.CharBuffer.wrap;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * An implementation of a comparator that sorts strings in an order that makes sense for a human. I.e. it performs an
+ * "alphabetical"/"alphanumeric" comparison instead of a lexicographical comparison. It is mainly intended to be used to
+ * sort information that are to be read by humans (in UI's etc). So keep in mind that what the "correct" ordering should
+ * be is entirely subjective and application specific. It should however be straightforward to modify the comparator to
+ * suit any specific needs.
+ * <p>
+ * This comparator also supports the use of both a locale-sensitive, or a completely custom, Collator for string
+ * comparison. This makes this comparator very flexible for sorting.
+ */
 public class AlphanumericComparator implements Comparator<CharSequence> {
 
     private final Collator collator;

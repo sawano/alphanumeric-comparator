@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
     <packaging>jar</packaging>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>2.0.0</version>
 
     <name>alphanumeric-comparator</name>
     <description>An implementation of a comparator that sort strings in an order that makes sense for a human.</description>
@@ -24,7 +23,7 @@
         <url>https://github.com/sawano/alphanumeric-comparator</url>
         <connection>scm:git:git@github.com:sawano/alphanumeric-comparator.git</connection>
         <developerConnection>scm:git:git@github.com:sawano/alphanumeric-comparator.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>alphanumeric-comparator-2.0.0</tag>
     </scm>
 
     <developers>
@@ -112,7 +111,7 @@
                 <version>3.5.0</version>
                 <configuration>
                     <rules>
-                        <DependencyConvergence/>
+                        <DependencyConvergence />
                     </rules>
                 </configuration>
                 <executions>

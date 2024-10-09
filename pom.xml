@@ -5,7 +5,7 @@
     <groupId>se.sawano.java</groupId>
     <artifactId>alphanumeric-comparator</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0</version>
+    <version>2.0.1-SNAPSHOT</version>
 
     <name>alphanumeric-comparator</name>
     <description>An implementation of a comparator that sort strings in an order that makes sense for a human.</description>
@@ -23,7 +23,7 @@
         <url>https://github.com/sawano/alphanumeric-comparator</url>
         <connection>scm:git:git@github.com:sawano/alphanumeric-comparator.git</connection>
         <developerConnection>scm:git:git@github.com:sawano/alphanumeric-comparator.git</developerConnection>
-        <tag>alphanumeric-comparator-2.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>

@@ -93,16 +93,7 @@ And an example of how to sort using language specific collation rules:
 
 Releases are available at the Maven central repository. Or you can just use the source code directly if you prefer that.
 
-#### Maven
-```xml
-<dependency>
-    <groupId>se.sawano.java</groupId>
-    <artifactId>alphanumeric-comparator</artifactId>
-    <version>1.4.1</version>
-</dependency>
-```
+You can find the latest releases here:
 
-#### Gradle
-```groovy
-'se.sawano.java:alphanumeric-comparator:1.4.1'
-```
+* [alphanumeric-comparator @ Maven Central](https://search.maven.org/search?q=g:se.sawano.java%20AND%20a:alphanumeric-comparator)
+* [alphanumeric-comparator @ mvnrepository.com](https://mvnrepository.com/artifact/se.sawano.java/alphanumeric-comparator)
